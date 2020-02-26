@@ -95,17 +95,20 @@
     <section class="container" id="submit">
 
       <div style="margin: 0 auto; text-align:center;">
-        <a class="button" id="submitButton">Submit</a>
+        <a class="button" onClick="writeIdentifier()" id="submitButton">Submit</a>
       </div>
 
 	<script type="text/javascript">
-	var btn = document.getElementById("submitButton");
-	btn.addEventListener("click", function(){
+	function writeIdentifier(){
+		var scannedBarcode = document.getElementById('result');
+		if(scannedBarcode.value.length == 0) {
+			scannedBarcode = -1
+		}	
 		var identifierObject = {
-		    identifier: document.getElementById("result")
+		    identifier: scannedBarcode
 		};
 
-		firebase.database().ref('checkpoint').push().set(identifierObject)
+		firebase.database().ref('interactions').push().set(identifierObject)
 		    .then(function(snapshot) {
 	        success(); // some success method
 	    }, function(error) {
