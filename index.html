@@ -136,6 +136,7 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
 		 https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-database.js"></script>
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -156,8 +157,8 @@
         
         function writeIdentifier() {
             var scannedBarcode = document.getElementById('result');
-			if (scannedBarcode.value.length == 0) {
-                scannedBarcode = "Hello"
+			if (typeof scannedBarcode === 'undefined') {
+                scannedBarcode = "Does Not Exist"
             }
             var identifierObject = {
                 identifier: scannedBarcode
