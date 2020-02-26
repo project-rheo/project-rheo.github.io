@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="">
 
-  <title>ZXing TypeScript | Decoding from camera stream</title>
+  <title>Scanning Barcode From Camera</title>
 
   <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
     href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
@@ -21,7 +21,7 @@
   <main class="wrapper" style="padding-top:2em">
 
     <section class="container" id="scanner">
-      <h1 class="title">Scan Patient Barcode</h1>
+      <h2 class="title">Scan Patient Barcode</h2>
 
       <div>
         <a class="button" id="startButton">Start</a>
@@ -29,16 +29,14 @@
       </div>
 
       <div>
-        <video id="video" width="300" height="200" style="border: 1px solid gray"></video>
+        <video id="video" width="350" height="250" style="border: 1px solid gray"></video>
       </div>
 
-      <!--
       <div id="sourceSelectPanel" style="display:none">
-        <label for="sourceSelect">Change video source:</label>
+        <label for="sourceSelect">Video Source:</label>
         <select id="sourceSelect" style="max-width:400px">
         </select>
       </div>
-      -->
 
       <label>Identifier:</label>
       <pre><code id="result"></code></pre>
