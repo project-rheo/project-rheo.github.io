@@ -24,10 +24,9 @@
             <h2 class="title">Location</h2>
             <form>
                 <fieldset>
-                    <select id="location">
-                        <option value="ed">ED</option>
+                    <select id="checkpointLocation">
+                        <option value="asu" selected="selected">ASU</option>
                         <option value="hld">Holding</option>
-                        <option value="asu">ASU</option>
                         <option value="or1">OR 1</option>
                         <option value="or2">OR 2</option>
                         <option value="or3">OR 3</option>
@@ -56,7 +55,7 @@
 
             <div id="sourceSelectPanel" style="display:none">
                 <label for="sourceSelect">Video Source:</label>
-                <select id="sourceSelect" style="max-width:400px"></select>
+                <select id="sourceSelect" style="max-width:350px"></select>
             </div>
 
             <br>
@@ -150,19 +149,25 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
 		
-		var interactionsReference = firebase.database().ref('checkpoints')
+		var interactionsReference = firebase.database().ref().child('checkpoints')
         
         function writeIdentifier() {
-            var scannedBarcode = document.getElementById('result');
-			if (typeof scannedBarcode === 'undefined') {
-                scannedBarcode = "Does Not Exist"
+            var scannedDatetime = new Date()
+            var scannedBarcode = document.getElementById('result').textContent;
+            var selectLoc = document.getElementById('checkpointLocation');
+            var selectedLocation = selectLoc.options[selectLoc.selectedIndex].value;
+			if (scannedBarcode == "") {
+                scannedBarcode = "Does Not Exist";
             }
-            var identifierObject = {
-                identifier: scannedBarcode
+            const identifierObject = {
+                id : scannedBarcode,
+                dt : JSON.stringify(scannedDatetime),
+                lc : selectedLocation
             };
 
             interactionsReference.push().set(identifierObject)
                 .then(function(snapshot) {
+                    console.log(identifierObject);
                 }, function(error) {
                 });
         }
