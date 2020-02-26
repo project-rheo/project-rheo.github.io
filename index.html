@@ -44,7 +44,7 @@
 
             <div style="margin: 0 auto; text-align:center;">
                 <a class="button" id="startButton">Start</a>
-                <a class="button" id="resetButton">Reset</a>
+                <a class="button" id="rese.collection("interactions")tButton">Reset</a>
             </div>
 
             <div style="margin: 0 auto; text-align:center;">
@@ -61,11 +61,9 @@
 
             <h2>Identifier:</h2>
             <pre style="font-size:16"><code id="result"></code></pre>
-
         </section>
 
         <section class="container" id="submit">
-
             <div style="margin: 0 auto; text-align:center;">
                 <a class="button" onClick="writeIdentifier()" id="submitButton">Submit</a>
             </div>
@@ -133,7 +131,6 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
 		 https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
-
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -149,17 +146,19 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
-
+		
+		var interactionsReference = firebase.database().ref('interactions')
+        
         function writeIdentifier() {
             var scannedBarcode = document.getElementById('result');
-            if (scannedBarcode.value.length == 0) {
+			if (scannedBarcode.value.length == 0) {
                 scannedBarcode = ""
             }
             var identifierObject = {
                 identifier: scannedBarcode
             };
 
-            firebase.database().ref('interactions').push().set(identifierObject)
+            interactionsReference.push().set(identifierObject)
                 .then(function(snapshot) {
                     success();
                 }, function(error) {
