@@ -23,17 +23,13 @@
     <section class="container" id="demo-content">
       <h1 class="title">Scan Patient Barcode</h1>
 
-      <p>
-        <a class="button-small button-outline" href="../../index.html">HOME 🏡</a>
-      </p>
-
       <div>
         <a class="button" id="startButton">Start</a>
         <a class="button" id="resetButton">Reset</a>
       </div>
 
       <div>
-        <video id="video" width="600" height="800" style="border: 1px solid gray"></video>
+        <video id="video" width="400" height="300" style="border: 1px solid gray"></video>
       </div>
 
       <div id="sourceSelectPanel" style="display:none">
@@ -42,18 +38,12 @@
         </select>
       </div>
 
-      <label>Result:</label>
+      <label>Identifier:</label>
       <pre><code id="result"></code></pre>
 
     </section>
 
-    <footer class="footer">
-      <section class="container">
-        <p>ZXing TypeScript Demo. Licensed under the <a target="_blank"
-            href="https://github.com/zxing-js/library#license" title="MIT">MIT</a>.</p>
-      </section>
-    </footer>
-
+    <footer></footer>
   </main>
 
   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
