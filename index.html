@@ -2,181 +2,172 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
 
-  <title>Scanning Barcode From Camera</title>
+    <title>Scanning Barcode From Camera</title>
 
-  <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-  <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
-  <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
-    href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
 </head>
 
 <body>
 
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
-	<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
-
-	<!-- TODO: Add SDKs for Firebase products that you want to use
-		 https://firebase.google.com/docs/web/setup#available-libraries -->
-	<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
-
-	<script>
-	  // Your web app's Firebase configuration
-	  var firebaseConfig = {
-		apiKey: "AIzaSyDzI1RQgV48p-Kzxa3s5i-WhtRZx_MFAFc",
-		authDomain: "lij-vs.firebaseapp.com",
-		databaseURL: "https://lij-vs.firebaseio.com",
-		projectId: "lij-vs",
-		storageBucket: "lij-vs.appspot.com",
-		messagingSenderId: "607209954978",
-		appId: "1:607209954978:web:12eb9f4850f04b9f3fc1fb",
-		measurementId: "G-E8K033690X"
-	  };
-	  // Initialize Firebase
-	  firebase.initializeApp(firebaseConfig);
-	  firebase.analytics();
-	</script>
-
     <main class="wrapper" style="padding-top:2em">
 
+        <section class="container" id="location">
+            <h2 class="title">Location</h2>
+            <form>
+                <fieldset>
+                    <select id="location">
+                        <option value="ed">ED</option>
+                        <option value="hld">Holding</option>
+                        <option value="asu">ASU</option>
+                        <option value="or1">OR 1</option>
+                        <option value="or2">OR 2</option>
+                        <option value="or3">OR 3</option>
+                        <option value="or4">OR 4</option>
+                        <option value="or5">OR 5</option>
+                        <option value="or6">OR 6</option>
+                        <option value="or7">OR 7</option>
+                        <option value="or8">OR 8</option>
+                        <option value="pacu">PACU</option>
+                    </select>
+                </fieldset>
+            </form>
+        </section>
 
-    <section class="container" id="location">
-        <h2 class="title">Location</h2>
-        <form>
-        <fieldset>
-            <select id="location">
-                    <option value="ed">ED</option>
-                    <option value="hld">Holding</option>
-                    <option value="asu">ASU</option>
-                    <option value="or1">OR 1</option>
-                    <option value="or2">OR 2</option>
-                    <option value="or3">OR 3</option>
-                    <option value="or4">OR 4</option>
-                    <option value="or5">OR 5</option>
-                    <option value="or6">OR 6</option>
-                    <option value="or7">OR 7</option>
-                    <option value="or8">OR 8</option>
-                    <option value="pacu">PACU</option>
-            </select>
-        </fieldset>
-        </form>
-    </section>
+        <section class="container" id="scanner">
+            <h2 class="title" style="text-align:center">Scan Patient Barcode</h2>
 
-    <section class="container" id="scanner">
-      <h2 class="title" style="text-align:center">Scan Patient Barcode</h2>
+            <div style="margin: 0 auto; text-align:center;">
+                <a class="button" id="startButton">Start</a>
+                <a class="button" id="resetButton">Reset</a>
+            </div>
 
-      <div style="margin: 0 auto; text-align:center;">
-        <a class="button" id="startButton">Start</a>
-        <a class="button" id="resetButton">Reset</a>
-      </div>
+            <div style="margin: 0 auto; text-align:center;">
+                <video id="video" width="350" height="250" style="border: 1px solid gray"></video>
+            </div>
 
-      <div style="margin: 0 auto; text-align:center;">
-        <video id="video" width="350" height="250" style="border: 1px solid gray"></video>
-      </div>
+            <div id="sourceSelectPanel" style="display:none">
+                <label for="sourceSelect">Video Source:</label>
+                <select id="sourceSelect" style="max-width:400px">
+                </select>
+            </div>
 
-      <div id="sourceSelectPanel" style="display:none">
-        <label for="sourceSelect">Video Source:</label>
-        <select id="sourceSelect" style="max-width:400px">
-        </select>
-      </div>
+            <br>
 
-      <br>
+            <h2>Identifier:</h2>
+            <pre style="font-size:16"><code id="result"></code></pre>
 
-      <h2>Identifier:</h2>
-      <pre style="font-size:16"><code id="result"></code></pre>
+        </section>
 
-    </section>
+        <section class="container" id="submit">
 
-    <section class="container" id="submit">
+            <div style="margin: 0 auto; text-align:center;">
+                <a class="button" onClick="writeIdentifier()" id="submitButton">Submit</a>
+            </div>
+        </section>
 
-      <div style="margin: 0 auto; text-align:center;">
-        <a class="button" onClick="writeIdentifier()" id="submitButton">Submit</a>
-      </div>
+        <footer></footer>
+    </main>
 
-	<script type="text/javascript">
-	function writeIdentifier(){
-		var scannedBarcode = document.getElementById('result');
-		if(scannedBarcode.value.length == 0) {
-			scannedBarcode = -1
-		}	
-		var identifierObject = {
-		    identifier: scannedBarcode
-		};
+    <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+    <script type="text/javascript">
+        window.addEventListener('load', function() {
+            let selectedDeviceId;
+            const codeReader = new ZXing.BrowserMultiFormatReader()
+            console.log('ZXing code reader initialized')
+            codeReader.getVideoInputDevices()
+                .then((videoInputDevices) => {
+                    const sourceSelect = document.getElementById('sourceSelect')
+                    selectedDeviceId = videoInputDevices[1].deviceId
+                    if (videoInputDevices.length >= 1) {
+                        videoInputDevices.forEach((element) => {
+                            const sourceOption = document.createElement('option')
+                            sourceOption.text = element.label
+                            sourceOption.value = element.deviceId
+                            sourceSelect.appendChild(sourceOption)
+                        })
 
-		firebase.database().ref('interactions').push().set(identifierObject)
-		    .then(function(snapshot) {
-	        success(); // some success method
-	    }, function(error) {
-	        console.log('error' + error);
-	        error(); // some error method
-	    });
-	}
-	</script>
+                        sourceSelect.onchange = () => {
+                            selectedDeviceId = sourceSelect.value;
+                        };
 
+                        const sourceSelectPanel = document.getElementById('sourceSelectPanel')
+                        sourceSelectPanel.style.display = 'block'
+                    }
 
-    </section>
+                    document.getElementById('startButton').addEventListener('click', () => {
+                        codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+                            if (result) {
+                                console.log(result)
+                                document.getElementById('result').textContent = result.text
+                            }
+                            if (err && !(err instanceof ZXing.NotFoundException)) {
+                                console.error(err)
+                                document.getElementById('result').textContent = err
+                            }
+                        })
+                        console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+                    })
 
-    <footer></footer>
-  </main>
+                    document.getElementById('resetButton').addEventListener('click', () => {
+                        codeReader.reset()
+                        document.getElementById('result').textContent = '';
+                        console.log('Reset.')
+                    })
 
-  <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
-  <script type="text/javascript">
-    window.addEventListener('load', function () {
-      let selectedDeviceId;
-      const codeReader = new ZXing.BrowserMultiFormatReader()
-      console.log('ZXing code reader initialized')
-      codeReader.getVideoInputDevices()
-        .then((videoInputDevices) => {
-          const sourceSelect = document.getElementById('sourceSelect')
-          selectedDeviceId = videoInputDevices[1].deviceId
-          if (videoInputDevices.length >= 1) {
-            videoInputDevices.forEach((element) => {
-              const sourceOption = document.createElement('option')
-              sourceOption.text = element.label
-              sourceOption.value = element.deviceId
-              sourceSelect.appendChild(sourceOption)
-            })
+                })
+                .catch((err) => {
+                    console.error(err)
+                })
+        })
+    </script>
 
-            sourceSelect.onchange = () => {
-              selectedDeviceId = sourceSelect.value;
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+		 https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDzI1RQgV48p-Kzxa3s5i-WhtRZx_MFAFc",
+            authDomain: "lij-vs.firebaseapp.com",
+            databaseURL: "https://lij-vs.firebaseio.com",
+            projectId: "lij-vs",
+            storageBucket: "lij-vs.appspot.com",
+            messagingSenderId: "607209954978",
+            appId: "1:607209954978:web:12eb9f4850f04b9f3fc1fb",
+            measurementId: "G-E8K033690X"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        function writeIdentifier() {
+            var scannedBarcode = document.getElementById('result');
+            if (scannedBarcode.value.length == 0) {
+                scannedBarcode = ""
+            }
+            var identifierObject = {
+                identifier: scannedBarcode
             };
 
-            const sourceSelectPanel = document.getElementById('sourceSelectPanel')
-            sourceSelectPanel.style.display = 'block'
-          }
-
-          document.getElementById('startButton').addEventListener('click', () => {
-            codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
-              if (result) {
-                console.log(result)
-                document.getElementById('result').textContent = result.text
-              }
-              if (err && !(err instanceof ZXing.NotFoundException)) {
-                console.error(err)
-                document.getElementById('result').textContent = err
-              }
-            })
-            console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
-          })
-
-          document.getElementById('resetButton').addEventListener('click', () => {
-            codeReader.reset()
-            document.getElementById('result').textContent = '';
-            console.log('Reset.')
-          })
-
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-    })
-  </script>
-
+            firebase.database().ref('interactions').push().set(identifierObject)
+                .then(function(snapshot) {
+                    success();
+                }, function(error) {
+                    console.log('error' + error);
+                    error();
+                });
+        }
+    </script>
 </body>
 
 </html>
