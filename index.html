@@ -48,7 +48,7 @@
             </div>
 
             <div style="margin: 0 auto; text-align:center;">
-                <video id="video" width="350" height="250" style="border: 1px solid gray"></video>
+                <video id="video" width="350" height="200" style="border: 1px solid gray"></video>
             </div>
 
             <div id="sourceSelectPanel" style="display:none">
@@ -158,7 +158,7 @@
                 identifier: scannedBarcode
             };
 
-            interactionsReference.push().set(identifierObject)
+            interactionsReference.push().set(scannedBarcode)
                 .then(function(snapshot) {
                     success();
                 }, function(error) {
