@@ -21,36 +21,37 @@
   <main class="wrapper" style="padding-top:2em">
 
 
-    <h2 class="title">Location</h2>
-    
-    <form>
-	<fieldset>
-	    <select id="location">
-                <option value="ed">ED</option>
-                <option value="hld">Holding</option>
-                <option value="asu">ASU</option>
-                <option value="or1">OR 1</option>
-                <option value="or2">OR 2</option>
-                <option value="or3">OR 3</option>
-                <option value="or4">OR 4</option>
-                <option value="or5">OR 5</option>
-                <option value="or6">OR 6</option>
-                <option value="or7">OR 7</option>
-                <option value="or8">OR 8</option>
-                <option value="pacu">PACU</option>
-	    </select>
-	</fieldset>
-    </form>
+    <section class="container" id="location">
+        <h2 class="title">Location</h2>
+        <form>
+        <fieldset>
+            <select id="location">
+                    <option value="ed">ED</option>
+                    <option value="hld">Holding</option>
+                    <option value="asu">ASU</option>
+                    <option value="or1">OR 1</option>
+                    <option value="or2">OR 2</option>
+                    <option value="or3">OR 3</option>
+                    <option value="or4">OR 4</option>
+                    <option value="or5">OR 5</option>
+                    <option value="or6">OR 6</option>
+                    <option value="or7">OR 7</option>
+                    <option value="or8">OR 8</option>
+                    <option value="pacu">PACU</option>
+            </select>
+        </fieldset>
+        </form>
+    </section>
 
     <section class="container" id="scanner">
-      <h2 class="title">Scan Patient Barcode</h2>
+      <h2 class="title" style="text-align:center">Scan Patient Barcode</h2>
 
-      <div>
+      <div style="margin: 0 auto; text-align:center;">
         <a class="button" id="startButton">Start</a>
         <a class="button" id="resetButton">Reset</a>
       </div>
 
-      <div style="margin: 0 auto;">
+      <div style="margin: 0 auto; text-align:center;">
         <video id="video" width="350" height="250" style="border: 1px solid gray"></video>
       </div>
 
@@ -60,8 +61,18 @@
         </select>
       </div>
 
-      <label>Identifier:</label>
-      <pre><code id="result"></code></pre>
+      <br>
+
+      <h2>Identifier:</h2>
+      <pre style="font-size:16"><code id="result"></code></pre>
+
+    </section>
+
+    <section class="container" id="submit">
+
+      <div style="margin: 0 auto; text-align:center;">
+        <a class="button" id="submitButton">Submit</a>
+      </div>
 
     </section>
 
