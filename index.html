@@ -147,7 +147,7 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
 		
-		var interactionsReference = firebase.database().ref('interactions')
+		var interactionsReference = firebase.database().ref('checkpoints')
         
         function writeIdentifier() {
             var scannedBarcode = document.getElementById('result');
