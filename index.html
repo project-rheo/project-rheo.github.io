@@ -63,9 +63,6 @@
 
             <h2>Identifier:</h2>
             <pre style="font-size:16"><code id="result"></code></pre>
-
-			<h2>Location:</h2>
-			<pre style="font-size:16"><code id="location"></code></pre>
         </section>
 
         <section class="container" id="submit">
@@ -164,12 +161,9 @@
                 identifier: scannedBarcode
             };
 
-            interactionsReference.push().set(scannedBarcode)
+            interactionsReference.push().set(identifierObject)
                 .then(function(snapshot) {
-                    success();
                 }, function(error) {
-                    console.log('error' + error);
-                    error();
                 });
         }
     </script>
