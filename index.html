@@ -18,7 +18,31 @@
 
 <body>
 
-  <main class="wrapper" style="padding-top:2em">
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		 https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+
+	<script>
+	  // Your web app's Firebase configuration
+	  var firebaseConfig = {
+		apiKey: "AIzaSyDzI1RQgV48p-Kzxa3s5i-WhtRZx_MFAFc",
+		authDomain: "lij-vs.firebaseapp.com",
+		databaseURL: "https://lij-vs.firebaseio.com",
+		projectId: "lij-vs",
+		storageBucket: "lij-vs.appspot.com",
+		messagingSenderId: "607209954978",
+		appId: "1:607209954978:web:12eb9f4850f04b9f3fc1fb",
+		measurementId: "G-E8K033690X"
+	  };
+	  // Initialize Firebase
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.analytics();
+	</script>
+
+    <main class="wrapper" style="padding-top:2em">
 
 
     <section class="container" id="location">
@@ -73,6 +97,24 @@
       <div style="margin: 0 auto; text-align:center;">
         <a class="button" id="submitButton">Submit</a>
       </div>
+
+	<script type="text/javascript">
+	var btn = document.getElementById("submitButton");
+	btn.addEventListener("click", function(){
+		var identifierObject = {
+		    identifier: document.getElementById("result")
+		};
+
+		firebase.database().ref('checkpoint').push().set(identifierObject)
+		    .then(function(snapshot) {
+	        success(); // some success method
+	    }, function(error) {
+	        console.log('error' + error);
+	        error(); // some error method
+	    });
+	}
+	</script>
+
 
     </section>
 
