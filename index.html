@@ -8,9 +8,12 @@
 
     <title>Scanning Barcode From Camera</title>
 
-    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
-    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null" href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
+    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
+	 href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
+	 href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+    <link rel="preload" as="style" onload="this.rel='stylesheet';this.onload=null"
+	 href="https://unpkg.com/milligram@1.3.0/dist/milligram.min.css">
 </head>
 
 <body>
@@ -44,7 +47,7 @@
 
             <div style="margin: 0 auto; text-align:center;">
                 <a class="button" id="startButton">Start</a>
-                <a class="button" id="rese.collection("interactions")tButton">Reset</a>
+                <a class="button" id="resetButton">Reset</a>
             </div>
 
             <div style="margin: 0 auto; text-align:center;">
@@ -53,14 +56,16 @@
 
             <div id="sourceSelectPanel" style="display:none">
                 <label for="sourceSelect">Video Source:</label>
-                <select id="sourceSelect" style="max-width:400px">
-                </select>
+                <select id="sourceSelect" style="max-width:400px"></select>
             </div>
 
             <br>
 
             <h2>Identifier:</h2>
             <pre style="font-size:16"><code id="result"></code></pre>
+
+			<h2>Location:</h2>
+			<pre style="font-size:16"><code id="location"></code></pre>
         </section>
 
         <section class="container" id="submit">
