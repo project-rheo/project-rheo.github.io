@@ -21,11 +21,12 @@
     <main class="wrapper" style="padding-top:2em">
 
         <section class="container" id="location">
-            <h2 class="title">Location</h2>
+            <h2 class="title" style="text-align:center;">1. Location</h2>
             <form>
                 <fieldset>
                     <select id="checkpointLocation">
-                        <option value="asu" selected="selected">ASU</option>
+                        <option value="nan" selected="selected"><i>Choose Location</i></option>
+                        <option value="asu">ASU</option>
                         <option value="hld">Holding</option>
                         <option value="or1">OR 1</option>
                         <option value="or2">OR 2</option>
@@ -42,29 +43,30 @@
         </section>
 
         <section class="container" id="scanner">
-            <h2 class="title" style="text-align:center">Scan Patient Barcode</h2>
+            <h2 class="title" style="text-align:center">2. Scan Patient Barcode</h2>
+
+            <div style="margin: 0 auto; text-align:center;">
+                <video id="video" width="350" height="200" style="border: 1px solid gray"></video>
+            </div>
 
             <div style="margin: 0 auto; text-align:center;">
                 <a class="button" id="startButton">Start</a>
                 <a class="button" id="resetButton">Reset</a>
             </div>
 
-            <div style="margin: 0 auto; text-align:center;">
-                <video id="video" width="350" height="200" style="border: 1px solid gray"></video>
-            </div>
-
             <div id="sourceSelectPanel" style="display:none">
                 <label for="sourceSelect">Video Source:</label>
                 <select id="sourceSelect" style="max-width:350px"></select>
             </div>
+        </section>
 
-            <br>
-
-            <h2>Identifier:</h2>
+        <section class="container" id="identifier">
+             <h2 class="title" style="text-align:center">3. Confirm Identifier</h2>
             <pre style="font-size:16"><code id="result"></code></pre>
         </section>
 
         <section class="container" id="submit">
+            <h2 class="title" style="text-align:center">4. Submit Data</h2>
             <div style="margin: 0 auto; text-align:center;">
                 <a class="button" onClick="writeIdentifier()" id="submitButton">Submit</a>
             </div>
@@ -156,8 +158,8 @@
             var scannedBarcode = document.getElementById('result').textContent;
             var selectLoc = document.getElementById('checkpointLocation');
             var selectedLocation = selectLoc.options[selectLoc.selectedIndex].value;
-			if (scannedBarcode == "") {
-                scannedBarcode = "Does Not Exist";
+			if (selectedLocation == "nan") {
+                selectedLocation = "";
             }
             const identifierObject = {
                 id : scannedBarcode,
