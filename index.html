@@ -25,7 +25,7 @@
             <form>
                 <fieldset>
                     <select id="checkpointLocation">
-                        <option value="nan" selected="selected"><i>Choose Location</i></option>
+                        <option value="" selected="selected"><i>Choose Location</i></option>
                         <option value="asu">ASU</option>
                         <option value="hld">Holding</option>
                         <option value="or1">OR 1</option>
@@ -62,7 +62,7 @@
 
         <section class="container" id="identifier">
              <h2 class="title" style="text-align:center">3. Confirm Identifier</h2>
-            <pre style="font-size:16"><code id="result"></code></pre>
+            <pre style="font-size:150%;"><code id="result"></code></pre>
         </section>
 
         <section class="container" id="submit">
@@ -151,27 +151,29 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
 		
-		var interactionsReference = firebase.database().ref().child('checkpoints')
+		var interactionsReference = firebase.database().ref()
         
         function writeIdentifier() {
-            var scannedDatetime = new Date()
             var scannedBarcode = document.getElementById('result').textContent;
+            var scannedDatetime = new Date()
             var selectLoc = document.getElementById('checkpointLocation');
             var selectedLocation = selectLoc.options[selectLoc.selectedIndex].value;
-			if (selectedLocation == "nan") {
-                selectedLocation = "";
-            }
+            
             const identifierObject = {
-                id : scannedBarcode,
                 dt : JSON.stringify(scannedDatetime),
                 lc : selectedLocation
             };
 
-            interactionsReference.push().set(identifierObject)
-                .then(function(snapshot) {
-                    console.log(identifierObject);
-                }, function(error) {
-                });
+            if(scannedBarcode) {
+                scannedBarcode = scannedBarcode.replace(/^0+/,'');
+                interactionsReference.child(scannedBarcode).push().set(identifierObject)
+                    .then(function(snapshot) {
+                        console.log(identifierObject);
+                    }, function(error) {
+                    });
+            } else {
+                console.log("Need to scan the barcode");
+            }
         }
     </script>
 </body>
