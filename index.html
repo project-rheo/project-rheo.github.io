@@ -166,7 +166,7 @@
 
             if(scannedBarcode) {
                 scannedBarcode = scannedBarcode.replace(/^0+/,'');
-                interactionsReference.child(scannedBarcode).push().set(identifierObject)
+                interactionsReference.child("bc").child(scannedBarcode).push().set(identifierObject)
                     .then(function(snapshot) {
                         console.log(identifierObject);
                     }, function(error) {
