@@ -159,14 +159,16 @@
             var selectLoc = document.getElementById('checkpointLocation');
             var selectedLocation = selectLoc.options[selectLoc.selectedIndex].value;
             
-            const identifierObject = {
-                dt : JSON.stringify(scannedDatetime),
-                lc : selectedLocation
-            };
-
             if(scannedBarcode) {
+                // Get rid of starting 0s
                 scannedBarcode = scannedBarcode.replace(/^0+/,'');
-                interactionsReference.child("bc").child(scannedBarcode).push().set(identifierObject)
+
+                const procYear = scannedDatetime.getFullYear();
+                const procMonth = scannedDatetime.getMonth() + 1;
+                const procDay = scannedDatetime.getDate();
+                const procTime = scannedDatetime.getTime();
+                const procDate = procYear + "-" + procMonth + "-" + procDay;
+                interactionsReference.child("bc").child(procDate).child(scannedBarcode).child(procTime)).set(selectedLocation)
                     .then(function(snapshot) {
                         console.log(identifierObject);
                     }, function(error) {
