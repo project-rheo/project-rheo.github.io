@@ -166,9 +166,8 @@
                 const procYear = scannedDatetime.getFullYear();
                 const procMonth = scannedDatetime.getMonth() + 1;
                 const procDay = scannedDatetime.getDate();
-                const procTime = scannedDatetime.getTime();
                 const procDate = procYear + "-" + procMonth + "-" + procDay;
-                interactionsReference.child("bc").child(procDate).child(scannedBarcode).child(procTime).set(selectedLocation)
+                interactionsReference.child("bc").child(procDate).child(scannedBarcode).child(JSON.stringify(scannedDatetime)).set(selectedLocation)
                     .then(function (snapshot) {
                         console.log(identifierObject);
                     }, function (error) {
